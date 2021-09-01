@@ -1,0 +1,11 @@
+obj
+bin
+appsettings.json
+*.db
+*.rdb
+*.DS_Store
+vs
+*.sqlite
+client/.vs/client/v16/.suo
+.vs/ecommerce/v16/.suo
+.vs/ecommerce/DesignTimeBuild/.dtbcache.v2

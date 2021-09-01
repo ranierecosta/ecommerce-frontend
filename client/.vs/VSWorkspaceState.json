@@ -1,0 +1,10 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\account"
+  ],
+  "SelectedNode": "\\src\\app\\account\\account-routing.module.ts",
+  "PreviewInSolutionExplorer": false
+}

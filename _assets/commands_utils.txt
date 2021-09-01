@@ -1,0 +1,78 @@
+// create a solution file
+dotnet new sln
+
+// create a webapi - API/
+dotnet new webapi
+
+// certificate of application (API) - on admin mode on API folder
+dotnet dev-certs https -t
+
+// install dotnet ef (entity framework) tool (globaly)
+dotnet tool install --global dotnet-ef --version 3.1.201
+
+// create a initial migration
+dotnet ef migrations add InitialCreate -o Data/migrations
+
+// create/update database
+dotnet ef database update
+
+// create class librarys
+dotnet new classlib -o Core
+dotnet new classlib -o Infrastructure
+
+// add to solution
+dotnet sln add Core/
+dotnet sln add Infrastructure/
+
+// create dependencies between projects
+cd API
+dotnet add reference ../Infrastructure
+cd ..
+cd Infrastructure
+dotnet add reference ../Core
+cd ..
+dotnet restore
+
+// remove and create new migrations (on root)
+dotnet ef database drop -p Infrastructure -s API/
+dotnet ef migrations remove -p Infrastructure -s API
+dotnet ef migrations add InitialCreate -p Infrastructure -s API -o Data/Migrations
+
+// repeat after the creation of the ProductConfiguration
+dotnet ef migrations remove -p Infrastructure -s API
+dotnet ef migrations add InitialCreate -p Infrastructure -s API -o Data/Migrations
+
+// create angular project
+npm install -g @angular/cli
+ng new client
+ng serve
+
+// generate trusted SSL (on folder)
+Install like instructions
+
+// install ngx-bootstrap on https://valor-software.com/ngx-bootstrap/#/
+npm install ngx-bootstrap --save
+// or
+ng add ngx-bootstrap
+
+// add font-awesome to project
+npm install font-awesome
+
+// add Identity initials
+dotnet ef migrations add IdentityInitial -p Infrastructure -s API -o Identity/Migrations -c AppIdentityDbContext
+
+// add Order Entity migrations
+dotnet ef migrations add OrderEntityAdded -p .\Infrastructure\ -s .\API\ -c StoreContext
+
+// drop database after changes in datetimeoffset
+dotnet ef database drop -p .\Infrastructure\ -s .\API\ -c StoreContext
+
+// install stripe-cli (cards)
+Stripe dashboard go to: Developers > Webhooks > Install CLI
+cmds:
+stripe listen
+stripe listen -f https://localhost:5001/api/payments/webhook -e payment_intent.succeeded,payment_intent.payment_failed
+
+-- LINKS:
+https://themestr.app/
+https://bootswatch.com/
